@@ -1,0 +1,11 @@
+arm,seed,total_score,benchmarks,status,time_budget_s,rescore_rows,rescore_mismatches,evidence,notes
+B0,0,67.5,6 official instances,EXPERIMENTAL_LOCAL_2026-11-04,20.0,78,[],qsite-2026/retrospective/open-computing-fusion/work/f0_stage/04_EXPERIMENTS/official_rescore.json (authoritative),
+B0,1,67.5,6 official instances,EXPERIMENTAL_LOCAL_2026-11-04,20.0,78,[],qsite-2026/retrospective/open-computing-fusion/work/f0_stage/04_EXPERIMENTS/official_rescore.json (authoritative),
+B0,2,67.5,6 official instances,EXPERIMENTAL_LOCAL_2026-11-04,20.0,78,[],qsite-2026/retrospective/open-computing-fusion/work/f0_stage/04_EXPERIMENTS/official_rescore.json (authoritative),
+F1,0,67.5,6 official instances,EXPERIMENTAL_LOCAL_2026-11-04,20.0,78,[],qsite-2026/retrospective/open-computing-fusion/work/f0_stage/04_EXPERIMENTS/official_rescore.json (authoritative),
+F1,1,67.5,6 official instances,EXPERIMENTAL_LOCAL_2026-11-04,20.0,78,[],qsite-2026/retrospective/open-computing-fusion/work/f0_stage/04_EXPERIMENTS/official_rescore.json (authoritative),
+F1,2,67.5,6 official instances,EXPERIMENTAL_LOCAL_2026-11-04,20.0,78,[],qsite-2026/retrospective/open-computing-fusion/work/f0_stage/04_EXPERIMENTS/official_rescore.json (authoritative),
+F2,0,68.0,6 official instances,EXPERIMENTAL_LOCAL_2026-11-04,20.0,78,[],qsite-2026/retrospective/open-computing-fusion/work/f0_stage/04_EXPERIMENTS/official_rescore.json (authoritative),documented regression: qaoa_random 12.0 (5 SWAP/depth 14) vs B0 11.5
+F2,1,69.0,6 official instances,EXPERIMENTAL_LOCAL_2026-11-04,20.0,78,[],qsite-2026/retrospective/open-computing-fusion/work/f0_stage/04_EXPERIMENTS/official_rescore.json (authoritative),documented regression: dense_random 37.0 (26/22) vs B0 35.5; qaoa 12.0
+F2,2,68.0,6 official instances,EXPERIMENTAL_LOCAL_2026-11-04,20.0,78,[],qsite-2026/retrospective/open-computing-fusion/work/f0_stage/04_EXPERIMENTS/official_rescore.json (authoritative),
+NOTE,,,,,,,,qsite-2026/retrospective/open-computing-fusion/work/f0_stage/04_EXPERIMENTS/official_rescore.json + fusion_research_report.md (see docs/EVIDENCE_INDEX.md),"Raw solver-recorded per-case JSONL was superseded by the authoritative frozen-scorer rescore (78 rows, 0 mismatch). Per-case regressions per fusion_research_report.md. Pre-registered target total<=65.5 in >=2/3 seeds NOT met."

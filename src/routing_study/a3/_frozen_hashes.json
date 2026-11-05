@@ -1,0 +1,12 @@
+{
+  "architecture_id": "OC-V2-A3-BIDIRECTIONAL-20260921",
+  "source_base": "qsite-2026/open/open-computing/frozen/oc-v2-a3-bidirectional-20260921/production/",
+  "files": {
+    "solution.py": "f49aad38096ae4ba5d2e8e3d9d202110af86edd0f637b58d089e74da2115bb6c",
+    "placement.py": "2c739bc2fb13192e71c5f9d76d50821c1b3188a91a60408657e451185e7c41c0",
+    "routing.py": "546f2d21e3ab167e08f356a21f9c14e85f36a9a81ce1f3a40cafa05139feb8b1"
+  },
+  "verified_utc": "2026-11-05T00:00:00Z",
+  "freeze_utc": "2026-09-21T14:20:47.471428+00:00",
+  "status": "MIGRATED_BYTE_FOR_BYTE_FOR_P1_LOCAL_BUILD"
+}

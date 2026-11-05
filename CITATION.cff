@@ -1,0 +1,19 @@
+cff-version: 1.2.0
+message: "If you use this software in your work, please cite it as below."
+title: "Quantum Routing Benchmark Study"
+authors:
+  - given-names: Bob
+    family-names: Oner
+version: "0.1.0"
+license: MIT
+keywords:
+  - quantum computing
+  - circuit routing
+  - compilation
+  - placement
+  - benchmark reproducibility
+  - Q-SITE 2026
+# NOTE: `date-released`, DOI, repository URL, email, ORCID, and paper metadata are intentionally
+# absent. This software has not been formally released or peer-reviewed (the Q-SITE competition
+# submission is a study record, not a peer-reviewed paper). A repository URL/DOI may be added only
+# when the repository actually exists.

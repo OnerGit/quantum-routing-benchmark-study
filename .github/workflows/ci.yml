@@ -1,0 +1,38 @@
+name: ci
+
+# Minimal CI workflow for this repository.
+#
+# Security properties:
+# - Every external action is pinned to a verified full-length commit SHA:
+#   * actions/checkout @ 11d5960a326750d5838078e36cf38b85af677262  (tag v4; verified via
+#     `git ls-remote` and a direct fetch of the exact commit)
+#   * astral-sh/setup-uv @ d0cc045d04ccac9d8b7881df0226f9e82c39688e  (tag v6; verified via the
+#     peeled ref `v6^{}` from `git ls-remote` and a direct fetch of the exact commit)
+# - `permissions: contents: read` (minimum privilege).
+# - No secrets, no write tokens, no artifact upload, no deployment, no publication.
+# - Dependency installation (`uv sync --frozen`) is a distinct step from offline test execution
+#   (`uv run pytest -q -m "not external"`), which never downloads third-party solvers or the
+#   official starter.
+# - These steps run only admitted repository tests; no third-party solver is fetched or executed.
+
+on:
+  push:
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+      - uses: astral-sh/setup-uv@d0cc045d04ccac9d8b7881df0226f9e82c39688e
+        with:
+          enable-cache: true
+      - name: Install dependencies from committed lockfile
+        run: uv sync --frozen
+      - name: Run the offline test suite (no third-party solvers, no official starter download)
+        run: uv run pytest -q -m "not external"
+      - name: Verify frozen A3 source hashes and historical results integrity
+        run: uv run pytest -q tests/test_a3_integrity.py tests/test_claims_integrity.py

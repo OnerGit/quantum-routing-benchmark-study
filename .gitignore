@@ -1,0 +1,46 @@
+# Python / uv
+.venv/
+venv-*/
+__pycache__/
+*.py[cod]
+*.pyo
+.pytest_cache/
+.python-version.marker
+
+# Jupyter
+.ipynb_checkpoints/
+
+# Environment / secrets
+pyvenv.cfg
+.env
+.env.*
+!.env.example
+credentials
+.credentials
+*.pem
+*.key
+.attach
+
+# Local build-time vendor data (pinned official checkout + script temp/backup dirs) —
+# all runtime data created under vendor/ is excluded from any release.
+vendor/
+
+# Internal review assets (never published)
+review-packages/
+internal/
+
+# Runtime / generated artifacts
+*.log
+*.jsonl
+tmp/
+work/
+
+# OS / editors
+.DS_Store
+Thumbs.db
+*:Zone.Identifier
+
+# Build artifacts
+dist/
+build/
+*.egg-info/

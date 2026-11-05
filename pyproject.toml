@@ -1,0 +1,51 @@
+[build-system]
+requires = ["hatchling>=1.27.0"]
+build-backend = "hatchling.build"
+
+[project]
+name = "quantum-routing-benchmark-study"
+version = "0.1.0"
+description = "Independent empirical study of quantum circuit routing algorithms and benchmark reproducibility (originating from Q-SITE 2026 Open Computing research)."
+readme = "README.md"
+requires-python = ">=3.12"
+authors = [
+  { name = "Bob Oner" },
+]
+license = "MIT"
+license-files = ["LICENSE"]
+keywords = ["quantum", "compiler", "routing", "benchmark", "reproducibility"]
+classifiers = [
+  "Intended Audience :: Science/Research",
+  "Programming Language :: Python :: 3",
+  "Topic :: Scientific/Engineering",
+]
+dependencies = [
+  "networkx>=3.1",
+]
+
+[project.optional-dependencies]
+# Extra convenience for figures/analysis (never vendored).
+figures = ["matplotlib>=3.8"]
+
+[dependency-groups]
+dev = [
+  "pytest>=8.0",
+  # Used by the metadata-validation tests to parse YAML (CITATION draft, package metadata).
+  "PyYAML>=6.0",
+  # Needed only by the optional external tests that import the official starter kit
+  # (its package __init__ imports a matplotlib-based visualizer).
+  "matplotlib>=3.8",
+]
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/routing_study"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = "-ra"
+markers = [
+  "external: requires an optional pinned checkout of the official starter (skipped by default)",
+]
+
+[tool.uv]
+package = true

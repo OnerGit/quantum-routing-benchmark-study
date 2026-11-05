@@ -1,0 +1,8 @@
+benchmark,architecture,status,valid,swap_count,depth,score,runtime_ms,oracle_valid,ordered_semantics,evidence
+ghz_star,OC-V2-A3-BIDIRECTIONAL-20260921,RECORDED_HISTORICAL,True,4,7,7.5,1.2161880149506032,True,True,qsite-2026/open/open-computing/evidence/gate7e/a3_authority.json (sha 8f0e7830...)
+chain_trotter,OC-V2-A3-BIDIRECTIONAL-20260921,RECORDED_HISTORICAL,True,1,10,6.0,1.1829790018964559,True,True,qsite-2026/open/open-computing/evidence/gate7e/a3_authority.json (sha 8f0e7830...)
+ladder_trotter,OC-V2-A3-BIDIRECTIONAL-20260921,RECORDED_HISTORICAL,True,9,11,14.5,2.536348009016365,True,True,qsite-2026/open/open-computing/evidence/gate7e/a3_authority.json (sha 8f0e7830...)
+qaoa_random,OC-V2-A3-BIDIRECTIONAL-20260921,RECORDED_HISTORICAL,True,11,17,19.5,2.2305969905573875,True,True,qsite-2026/open/open-computing/evidence/gate7e/a3_authority.json (sha 8f0e7830...)
+dense_random,OC-V2-A3-BIDIRECTIONAL-20260921,RECORDED_HISTORICAL,True,42,35,59.5,8.240019000368193,True,True,qsite-2026/open/open-computing/evidence/gate7e/a3_authority.json (sha 8f0e7830...)
+vqe_layers,OC-V2-A3-BIDIRECTIONAL-20260921,RECORDED_HISTORICAL,True,0,6,3.0,2.260765992105007,True,True,qsite-2026/open/open-computing/evidence/gate7e/a3_authority.json (sha 8f0e7830...)
+TOTAL,OC-V2-A3-BIDIRECTIONAL-20260921,RECORDED_HISTORICAL,6/6,67,86,110.0,,6/6,,same
