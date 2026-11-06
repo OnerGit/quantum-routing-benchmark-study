@@ -14,7 +14,7 @@ originating from Q-SITE 2026 Open Computing research.
 Original-content license: **MIT** ([LICENSE](LICENSE)). Citation metadata:
 [CITATION.cff](CITATION.cff).
 
-## 1. The problem, and what this study establishes
+## 1. Problem and Study Scope
 
 **The routing problem.** A compiled quantum circuit must be made to run on a device whose qubits are
 connected by a fixed, sparse coupling graph. When a two-qubit gate acts on two logical qubits that are
@@ -29,45 +29,24 @@ The official benchmark used in this study scores a routed circuit with the compo
 `score = swaps + 0.5 * depth`: lower is better, and a placement/routing heuristic must decide both
 where the logical qubits start and how SWAPs are interleaved.
 
-**What was implemented.** (a) our own fully **deterministic** placement + routing pipeline ("**A3**",
-`OC-V2-A3-BIDIRECTIONAL-20260921`), frozen during the original research and migrated **byte-for-byte**
-into this repository (`src/routing_study/a3/`); (b) **independent, reproducible evaluations** of two
-third-party solvers (HorizonRoute, Exact-Beam) against the frozen official scorer on the same six
-official instances; (c) a one-shot **F0 fusion study** that combined mechanisms from all three under a
-common per-instance search budget and produced a documented **negative result**.
+The study covers an original deterministic routing implementation, independent reproduction of
+third-party benchmark scores, and controlled experiments with combined search mechanisms. These are
+**different evidence types**, not a single equal-budget competition. The formal research questions
+are documented in the [Research Report](docs/RESEARCH_REPORT.md#research-questions-and-evidence-path).
 
-**What the measured results establish.**
+## 2. Research Contributions
 
-| Method | Total (6 official cases) | Evidence status |
-|---|---:|---|
-| A3 (original submission) | **110.0** | `RECORDED_HISTORICAL` (frozen source, recorded run) |
-| HorizonRoute (local reproduction) | **68.5** | `LOCALLY_REPRODUCED_HISTORICAL` |
-| Exact-Beam (local reproduction) | **67.5** | `LOCALLY_REPRODUCED_HISTORICAL` |
-| F0 B0 / F1 (equal 20 s budget, 3 seeds) | **67.5 / 67.5** | `EXPERIMENTAL_LOCAL` (negative result) |
-| F0 F2 (equal 20 s budget, 3 seeds) | **68 / 69 / 68** | `EXPERIMENTAL_LOCAL` (regression) |
-
-**What the results do NOT establish.** Every number above is **single-shot evidence on the six
-official instances under method-specific run budgets** (fast-fixed for A3, quality-bounded for
-HorizonRoute, anytime ≤20 s for Exact-Beam, equal 20 s for F0). These totals are **not** an
-equal-budget leaderboard, and they imply **no** generality, optimality, asymptotic, production, or
-quantum-advantage claim. The F0 pre-registered improvement target (`≤ 65.5` in at least 2/3 seeds) was
-**not** met. The stretch-bonus figure (26.5) remains excluded and unverified.
-
-**Where to continue.** Quick start below; environment/bootstrap distinction in
-[docs/REPRODUCIBILITY.md](docs/REPRODUCIBILITY.md); research questions and full analysis in
-[docs/RESEARCH_REPORT.md](docs/RESEARCH_REPORT.md); method details in
-[docs/METHODOLOGY.md](docs/METHODOLOGY.md); evidence pointers in
-[docs/EVIDENCE_INDEX.md](docs/EVIDENCE_INDEX.md); every caveat in
-[docs/LIMITATIONS.md](docs/LIMITATIONS.md).
-
-## 2. Research Questions
-
-1. Can third-party reported benchmark scores be **independently reproduced** on a different host with
-   a frozen official scorer?
-2. Does combining placement feedback from the original A3 pipeline into an Exact-Beam-style solver
-   improve the result under an equal wall-clock budget?
-3. Does a critical-path-aware ordering with bounded Pareto retention improve the same solver further?
-4. What evidence does the frozen A3 pipeline actually support, and what must stay `RECORDED_HISTORICAL`?
+- **Audited original implementation.** Preserve the fully **deterministic** A3 placement-and-routing
+  pipeline (`OC-V2-A3-BIDIRECTIONAL-20260921`) **byte-for-byte**, together with its recorded historical
+  result and source-integrity checks (`src/routing_study/a3/`).
+- **Independent benchmark reproduction.** Reproduce the reported six-instance scores of HorizonRoute
+  and Exact-Beam using the frozen official scorer, while respecting third-party source licensing;
+  those solvers are **linked, not bundled**.
+- **Controlled fusion experiment.** Evaluate A3-derived placement feedback (F1) and critical-path/
+  Pareto additions (F2) against a frozen Exact-Beam reference (B0) under a common nominal per-case
+  budget, including the documented negative result and implementation caveats.
+- **Traceable evidence and limitations.** Keep recorded history, local reproduction, and new
+  experimental observations distinct; disclose differing budgets, seeds, and interpretation limits.
 
 ## 3. Algorithms Studied
 
@@ -91,10 +70,30 @@ See [docs/RESEARCH_REPORT.md](docs/RESEARCH_REPORT.md) and [docs/METHODOLOGY.md]
 - The F0 study additionally used four pre-registered synthetic held-out instances.
 - **Runtime budgets were NOT homogeneous** across methods — see the budget caveat below.
 
-## 5. Results Overview
+## 5. Results and Evidence Limits
 
-The summary table is given in [§1](#1-the-problem-and-what-this-study-establishes). Per-case detail
-lives in audited, immutable CSV files:
+The following are **recorded or locally reproduced observations**, classified by evidence source.
+Lower scores are better under the official objective, but the methods were **not** all evaluated
+under identical runtime budgets.
+
+| Method | Total (6 official cases) | Evidence status |
+|---|---:|---|
+| A3 (original submission) | **110.0** | `RECORDED_HISTORICAL` (frozen source, recorded run) |
+| HorizonRoute (local reproduction) | **68.5** | `LOCALLY_REPRODUCED_HISTORICAL` |
+| Exact-Beam (local reproduction) | **67.5** | `LOCALLY_REPRODUCED_HISTORICAL` |
+| F0 B0 / F1 (equal 20 s budget, 3 seeds) | **67.5 / 67.5** | `EXPERIMENTAL_LOCAL` (negative result) |
+| F0 F2 (equal 20 s budget, 3 seeds) | **68 / 69 / 68** | `EXPERIMENTAL_LOCAL` (regression) |
+
+**Interpretation boundary.** A3 is a frozen, recorded historical result; the third-party solver
+figures are single local reproductions; F0 reports three seeded experimental runs. Budget regimes
+still differ across these groups (fast-fixed A3, quality-bounded HorizonRoute, anytime ≤20 s
+Exact-Beam, nominal equal 20 s per case for F0 with disclosed wall-clock overruns). The table is
+**not** an equal-budget leaderboard and establishes no generality, optimality, asymptotic,
+production, or quantum-advantage claim. F0 did **not** meet its pre-registered improvement target
+(`≤ 65.5` in at least 2/3 seeds); the F2 regression is subject to its documented logic/index caveat.
+The stretch-bonus figure (26.5) remains excluded and unverified.
+
+Per-case detail lives in audited, immutable CSV files:
 
 - [results/a3_historical.csv](results/a3_historical.csv) — A3 (110.0, `RECORDED_HISTORICAL`)
 - [results/horizonroute_reproduction.csv](results/horizonroute_reproduction.csv) — 68.5, locally reproduced
@@ -103,10 +102,14 @@ lives in audited, immutable CSV files:
 
 Each row carries `source`, `status`, `budget`/`seeds`, and an evidence pointer. A compact
 **Result Evidence Matrix** (method · scope · result · classification · seed/budget · reproduction ·
-limitations) is provided in [docs/RESEARCH_REPORT.md](docs/RESEARCH_REPORT.md). These totals are
-recorded/reproduced evidence under **method-specific** budgets — read them as a comparison of recorded
-behavior, not as a fair equal-budget leaderboard. The F0 pre-registered target (`total <= 65.5` in at
-least 2/3 seeds) was **not met**; research decision `NO_GO_FURTHER_RESEARCH`.
+limitations) is provided in [docs/RESEARCH_REPORT.md](docs/RESEARCH_REPORT.md). The F0 research
+decision was `NO_GO_FURTHER_RESEARCH`.
+
+**Further reading:** the [Research Report](docs/RESEARCH_REPORT.md) contains the research questions
+and full analysis; [Methodology](docs/METHODOLOGY.md) describes the algorithms;
+[Evidence Index](docs/EVIDENCE_INDEX.md) traces the records; [Limitations](docs/LIMITATIONS.md)
+documents the caveats; and [Reproducibility](docs/REPRODUCIBILITY.md) distinguishes environment
+bootstrap from offline test execution.
 
 ## 6. Quick Start
 
@@ -174,15 +177,16 @@ See [THIRD_PARTY.md](THIRD_PARTY.md) and [NOTICE.md](NOTICE.md).
   status and no such artifact should be inferred from this document.
 - **Source / publication status — read with care.** Several distinct statuses are deliberately kept
   apart:
-  - **source repository availability** — this document declares no source-repository address;
-  - **formal tagged software release** — none is declared;
-  - **PyPI distribution** — none is declared;
-  - **academic publication or DOI** — none is declared.
+  - **source repository availability** — the public GitHub source repository hosting this README is
+    available to readers;
+  - **formal tagged software release** — none has been created or declared;
+  - **PyPI distribution** — none has been created or declared;
+  - **academic publication or DOI** — none has been created or declared.
 
-  A public source repository — if and when one exists — would not by itself imply a formal release, a
-  PyPI package, an academic publication, or a DOI. This document asserts none of these artifacts and
-  should not be read as implying any of them.
-- `internal/` and `review-packages/` are internal-only and excluded from any future release.
+  Public source availability **does not imply** a formal release, a PyPI package, an academic
+  publication, or a DOI. The citation metadata intentionally does not assert any of those artifacts.
+- `internal/` and `review-packages/` are internal-only and excluded from this public repository and
+  any future formal release.
 
 ## Project maintenance notes
 

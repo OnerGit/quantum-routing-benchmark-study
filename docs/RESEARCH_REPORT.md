@@ -10,6 +10,29 @@ placement+routing pipeline (A3) behaves on the official instances, (b) whether t
 and (c) whether combining A3 placement feedback and critical-path/Pareto ideas with an Exact-Beam-style
 solver improves results under a common wall-clock budget.
 
+### Research questions and evidence path
+
+The archived work is organized around four questions. They distinguish reproducibility,
+algorithmic interventions, and evidence provenance; they do **not** introduce new experiments or
+claims beyond the recorded study.
+
+1. **RQ1 — Independent reproducibility.** Can the reported HorizonRoute and Exact-Beam scores be
+   reproduced on a different host using the frozen official scorer? See the local reproduction
+   records in §4.2–4.3 and the corresponding finding in §5.
+2. **RQ2 — A3 placement feedback.** Does adding layouts derived from the frozen A3 pipeline to an
+   Exact-Beam-style solver improve outcomes under a common per-instance wall-clock budget? This is
+   the F0 F1 intervention, compared with the B0 reference (§4.4 and §5).
+3. **RQ3 — Critical-path/Pareto intervention.** Does critical-path-aware ordering with bounded Pareto
+   retention improve the same solver further? This is the F0 F2 intervention (§4.4 and §5); its
+   observed regression is subject to a potential logic/index issue and supports **no** general
+   judgment about these mechanisms.
+4. **RQ4 — Original-result provenance.** What does the frozen A3 source and its recorded history
+   actually establish, and which claims must remain `RECORDED_HISTORICAL` rather than being presented
+   as independently re-run evidence? See §3, §4.1, and §6.
+
+The answers must be read with the method-specific budget and evidence-classification limits in §4.5
+and §6. In particular, reproducing third-party scores is not a common-budget performance ranking.
+
 ## 2. Methods overview
 
 | Method | Placement | Routing / search | Determinism |
